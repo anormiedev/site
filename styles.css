@@ -1,15 +1,15 @@
 /* Color Variables */
 :root {
     /* Light mode */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f8f8;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666;
-    --text-tertiary: #999;
-    --border-color: #f0f0f0;
-    --accent-color: #ff8c42;
-    --accent-hover: #ff7a2f;
-    --section-label: #ccc;
+    --bg-primary: #fafafa;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-color: #e5e5e5;
+    --accent-color: #ff6b35;
+    --accent-hover: #ff8456;
+    --section-label: #999999;
 }
 
 html.dark-mode {
@@ -33,31 +33,45 @@ html.dark-mode {
 }
 
 body {
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: "Geist", sans-serif;
+    font-optical-sizing: auto;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--bg-primary);
-    padding: 2rem 1rem;
+    padding: clamp(3rem, 6vw, 5rem) clamp(3rem, 8vw, 8rem);
     transition: background 0.3s, color 0.3s;
 }
 
 .container {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     background: var(--bg-primary);
     border-radius: 0;
     box-shadow: none;
-    overflow: hidden;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(320px, 450px) minmax(0, 1fr);
+    gap: clamp(4rem, 10vw, 12rem);
+    padding: 0;
+    align-items: start;
+}
+
+.main-content {
+    padding: 0 clamp(2rem, 4vw, 4rem) 0 0;
 }
 
 /* Header */
 .header {
     background: var(--bg-primary);
     color: var(--text-primary);
-    padding: 2.5rem 2rem;
+    padding: 0 clamp(3rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem) 0;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    border-right: none;
+    border-bottom: none;
     transition: background 0.3s, border-color 0.3s;
+    position: sticky;
+    top: clamp(3rem, 6vw, 5rem);
+    align-self: start;
 }
 
 .header-top {
@@ -75,31 +89,29 @@ body {
 .theme-toggle {
     background: var(--accent-color);
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
     padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.9;
     transition: all 0.3s;
-    border-radius: 8px;
+    border-radius: 50%;
     flex-shrink: 0;
-    color: white;
-    font-size: 1.25rem;
-    margin-top: 0.25rem;
+    color: #ffffff;
+    font-size: 1rem;
+    margin-top: 0;
 }
 
 .theme-toggle:hover {
-    opacity: 1;
+    opacity: 0.9;
     transform: scale(1.05);
-    background: var(--accent-hover);
 }
 
 .theme-toggle i {
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +131,7 @@ html.dark-mode .theme-toggle .sun-icon {
 }
 
 html.dark-mode .theme-toggle .moon-icon {
-    display: block;
+    display: flex;
 }
 
 .location i {
@@ -128,43 +140,73 @@ html.dark-mode .theme-toggle .moon-icon {
 }
 
 .header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: 0.75rem;
     color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
 }
 
 .tagline {
-    font-size: 1rem;
-    opacity: 0.7;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    opacity: 0.6;
     margin-bottom: 0.5rem;
     color: var(--text-secondary);
+    font-weight: 400;
 }
 
 .location {
-    font-size: 0.9rem;
-    opacity: 0.6;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    opacity: 0.5;
     color: var(--text-tertiary);
+    font-weight: 400;
 }
 
 .contact {
-    margin-top: 1rem;
+    margin-top: 2rem;
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.contact-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+    align-items: center;
 }
 
 .contact a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 400;
-    opacity: 0.8;
-    font-size: 0.9rem;
-    transition: opacity 0.3s;
+    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+    transition: all 0.3s;
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+}
+
+.contact a[href^="tel"] {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
 
 .contact a:hover {
-    opacity: 1;
-    text-decoration: underline;
+    background: var(--bg-primary);
+    border-color: var(--accent-color);
+    color: var(--text-primary);
 }
 
 /* Download Section */
@@ -213,40 +255,47 @@ html.dark-mode .theme-toggle .moon-icon {
 
 /* Sections */
 .section {
-    padding: 2rem;
-    border-bottom: 1px solid var(--border-color);
+    padding: 0 0 4rem 0;
+    border-bottom: none;
     transition: background 0.3s, border-color 0.3s;
+}
+
+.section:first-child {
+    padding-top: 0;
 }
 
 .section:last-child {
     border-bottom: none;
+    padding-bottom: 0;
 }
 
 .section p {
     color: var(--text-secondary);
     line-height: 1.7;
-    font-size: 0.95rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    font-weight: 400;
 }
 
 .section h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    margin-bottom: 1.75rem;
     color: var(--text-primary);
     position: relative;
     display: block;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 .section[data-label]::before {
     content: attr(data-label);
     display: block;
-    font-size: 0.7rem;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
     color: var(--section-label);
-    font-weight: 500;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
 }
 
 /* Skills Grid */
@@ -290,24 +339,19 @@ html.dark-mode .theme-toggle .moon-icon {
 
 /* Experience */
 .experience {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
 }
 
 .exp-header-row {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 2rem;
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
+    display: none;
 }
 
 .exp-col-header {
-    font-size: 0.7rem;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
     color: var(--section-label);
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.1em;
 }
 
 .exp-col-header:last-child {
@@ -316,8 +360,8 @@ html.dark-mode .theme-toggle .moon-icon {
 
 .experience .exp-item {
     margin-bottom: 0;
-    padding-bottom: 2.5rem;
-    padding-top: 2.5rem;
+    padding-bottom: 4.5rem;
+    padding-top: 3rem;
     border-bottom: 1px solid var(--border-color);
     transition: border-color 0.3s;
 }
@@ -327,57 +371,66 @@ html.dark-mode .theme-toggle .moon-icon {
     padding-bottom: 0;
 }
 
+.experience .exp-item:first-child {
+    padding-top: 0;
+}
+
 .exp-content {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     align-items: flex-start;
 }
 
 .exp-description h3 {
-    font-size: 1.1rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
     color: var(--text-primary);
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
 }
 
 .exp-description p {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
     line-height: 1.6;
-    margin-top: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .exp-description strong {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .exp-list {
-    margin-top: 0.75rem;
-    padding-left: 1.5rem;
+    margin-top: 1.25rem;
+    padding-left: 0;
     list-style: none;
 }
 
 .exp-list li {
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
     color: var(--text-secondary);
     position: relative;
+    padding-left: 0;
+    line-height: 1.7;
 }
 
 .exp-list li::before {
-    content: '•';
-    margin-right: 0.5rem;
-    color: var(--text-tertiary);
+    content: '';
+    margin-right: 0;
 }
 
 .exp-period {
-    text-align: right;
+    text-align: left;
+    margin-top: 0.75rem;
 }
 
 .period {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
     color: var(--text-tertiary);
     font-weight: 400;
     white-space: nowrap;
@@ -415,17 +468,35 @@ html.dark-mode .theme-toggle .moon-icon {
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 1.5rem;
+    text-align: left;
+    padding: 3rem 0 0 0;
     background: var(--bg-primary);
     color: var(--text-tertiary);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--border-color);
+    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+    border-top: none;
     transition: background 0.3s, border-color 0.3s;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+    body {
+        padding: 2rem 1.5rem;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 2.5rem;
+        min-height: auto;
+    }
+
+    .header {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 0 2rem 0;
+    }
+
     .header h1 {
         font-size: 2rem;
     }
@@ -447,6 +518,11 @@ footer {
     .contact a {
         display: block;
         margin: 0.5rem 0;
+    }
+
+    .main-content {
+        padding-right: 0;
+        padding-left: 0;
     }
 
     .exp-header-row {
